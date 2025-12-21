@@ -1,12 +1,7 @@
-'''
-
-'''
-
-
 '''定义transformer模型'''
 import torch
 import torch.nn as nn
-from transformer.Layer import EncoderLayer, DecoderLayer
+from transformer.Layers import EncoderLayer, DecoderLayer
 
 __author__ = "Wu-yanzu"
 __time__ = "2025-11-30"
@@ -134,12 +129,7 @@ class Transformer(nn.Module):
 
         self.src_pad_idx, self.trg_pad_idx = src_pad_idx, trg_pad_idx
 
-        # In section 3.4 of paper "Attention Is All You Need", there is such detail:
-        # "In our model, we share the same weight matrix between the two
-        # embedding layers and the pre-softmax linear transformation...
-        # In the embedding layers, we multiply those weights by \sqrt{d_model}".
-        #
-        # Options here:
+        # Options:
         #   'emb': multiply \sqrt{d_model} to embedding output
         #   'prj': multiply (\sqrt{d_model} ^ -1) to linear projection output
         #   'none': no multiplication
